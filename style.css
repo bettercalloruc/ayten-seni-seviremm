@@ -1,0 +1,476 @@
+:root {
+    --primary: #ff6b6b;
+    --secondary: #f06292;
+    --background: #2c003e;
+    --text: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--background);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Yıldızlı Arka Plan */
+.stars, .twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.stars {
+    background: #000 url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    z-index: -2;
+}
+
+.twinkling {
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    z-index: -1;
+    animation: move-twinkle 200s linear infinite;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    z-index: 1;
+}
+
+.love-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.love-icon {
+    font-size: 50px;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.title {
+    color: var(--text);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    display: block;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.gif-container {
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.gif-container img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-yes, .btn-no {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-yes {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.btn-yes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn-yes:hover::before {
+    opacity: 1;
+}
+
+.btn-no {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-no:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.shine-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+/* Animasyonlar */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes shine {
+    0% { left: -50%; }
+    100% { left: 100%; }
+}
+
+@keyframes move-twinkle {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 480px) {
+    .love-card {
+        padding: 40px;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .buttons {
+        flex-direction: row;
+    }
+
+    .btn-yes, .btn-no {
+        width: auto;
+    }
+
+    .message h2 {
+        font-size: 2em;
+    }
+
+    .message p, .love-messages p {
+        font-size: 1.2em;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-btn {
+        font-size: 1.5em;
+    }
+
+    .title, .mega-title {
+        font-size: 4em;
+    }
+}
+
+/* Hover Efektleri */
+.btn-yes:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.btn-no:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+}
+
+/* Message Cards Styles */
+.message-cards {
+    position: relative;
+    min-height: 200px;
+}
+
+.message {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.message.active {
+    display: block;
+}
+
+.message h2 {
+    font-size: 2em;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.message p {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.navigation-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-btn {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+}
+
+#mainContent {
+    display: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+#messageCards {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Responsive adjustments for message cards */
+@media (max-width: 480px) {
+    .message h2 {
+        font-size: 1.5em;
+    }
+
+    .message p {
+        font-size: 1em;
+    }
+
+    .nav-btn {
+        font-size: 1.2em;
+    }
+}
+
+.custom-swal-content {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff69b4 #fff;
+}
+
+.custom-swal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-swal-content::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+}
+
+.custom-swal-content::-webkit-scrollbar-thumb {
+    background-color: #ff69b4;
+    border-radius: 10px;
+    border: 2px solid #fff;
+}
+
+.message-box {
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.message-box:hover {
+    transform: scale(1.02);
+}
+
+.emoji {
+    font-size: 2em;
+    margin-right: 15px;
+}
+
+.mega-title {
+    font-size: 4em;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.love-messages p {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.heart-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(255,105,180,0.2) 0%, rgba(255,20,147,0.1) 100%);
+    z-index: -1;
+    border-radius: 20px;
+}
+
+/* Yazıların beyaz ve parlak görünmesi */
+.message p, .love-messages p {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Mobilde yazıların daha net görünmesi */
+@media (max-width: 480px) {
+    .message p, .love-messages p {
+        font-size: 1.2em;
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .mega-title {
+        font-size: 4em !important;
+    }
+}
+
+/* Devam Et butonu */
+#continueButton {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+#continueButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#continueButton:hover::before {
+    opacity: 1;
+}
+
+#continueButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+}
+
+.love-messages p, .mega-title {
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 30px rgba(255, 255, 255, 0.3);
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Remove mobile-specific text shadow adjustments */
+@media (max-width: 480px) {
+    .message p, .love-messages p {
+        font-size: 1.2em;
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .mega-title {
+        font-size: 4em !important;
+    }
+}
