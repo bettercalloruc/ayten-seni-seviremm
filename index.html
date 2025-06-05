@@ -1,777 +1,133 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>꒒ ০ ⌵ ୧ ♡</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link rel="icon" href="icons8-heart-80.png" type="image/x-icon">
-</head>
-<!-- Musiqi oxuyucu -->
-  <audio id="romanticMusic" autoplay>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-    Sənin brauzerin bu musiqi formatını dəstəkləmir.
-  </audio>
-
-<body>
-
-    <div class="preloader">
-        <div class="heart-loader"></div>
-        <div class="loading-text">Qelbim senin üçün atır... 💕</div>
-    </div>
-    <div class="page-transition"></div>
-    <div class="stars"></div>
-    <div class="twinkling"></div>
-    
-    <div class="container">
-        <div class="love-card" id="messageCards">
-            <div class="love-icon animate__animated animate__heartBeat animate__infinite">
-                <i class="fas fa-heart"></i>
-            </div>
-            
-            <div class="message-cards">
-                <div class="message active animate__animated animate__fadeIn">
-                    <h2>💝</h2>
-                    <p>Bir xanım var;</p>
-                </div>
-                <div class="message">
-                    <h2>💖</h2>
-                    <p>Bir gözləri var əriyirəm görəndə.</p>
-                </div>
-                <div class="message">
-                    <h2>💗</h2>
-                    <p>Bir ses tonu var qelbimi titredir eşidəndə.</p>
-                </div>
-                <div class="message">
-                    <h2>💝</h2>
-                    <p>Sözleri var oxuduqca oxumaq isteyirem.</p>
-                </div>
-                <div class="message">
-                    <h2>💖</h2>
-                    <p>Bir gülüşü var. Yenidən aşiq olmaq istəyirəm.</p>
-                </div>
-                <div class="message">
-                    <h2>💕</h2>
-                    <p>O həyatıma girəndən onun üçün ölürem.</p>
-                </div>
-                <div class="message">
-                    <h2>💘</h2>
-                    <p>Onu çooooxx sevirəm.</p>
-                </div>
-                <div class="message">
-                    <h2>💝</h2>
-                    <p>Bir saçları var,Sanki payız küləyində rəqs edən ağac yarpaqları kimi.</p>
-                </div>
-                <div class="message">
-                    <h2>💖</h2>
-                    <p>Bir gözəlliyi var nəfəsimi kəsir.</p>
-                </div>
-                <div class="message">
-                    <h2>💗</h2>
-                    <p>Bir qəlbi var tərtəmiz.</p>
-                </div>
-                <div class="message">
-                    <h2>💓</h2>
-                    <p>O saflığın bədən tapmış halı.</p>
-                </div>
-                <div class="message">
-                    <h2>💞</h2>
-                    <p>Belke çox uzaqdı amma həmişə qəlbimdə.</p>
-                </div>
-                <div class="message">
-                    <h2>💕</h2>
-                    <p>Ölsəm buraxmaram onu o dərəcə.</p>
-                </div>
-                <div class="message">
-                    <h2>💘</h2>
-                    <p>O menim her şeyim , qaranlıq gecədə parıldayan ulduzum...</p>
-                </div>
-                <div class="message">
-                    <h2>💝</h2>
-                    <p>Gözəllər gözəlim.💕</p>
-                </div>
-                <div class="message">
-                    <h2>❤️</h2>
-                    <p>Sənə demək istədiyim çox şey var...</p>
-                    <button class="btn-yes shine-effect" id="continueButton">
-                        <i class="fas fa-heart"></i> De
-                    </button>
-                </div>
-            </div>
-
-            <div class="navigation-buttons">
-                <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-
-        <div class="love-card" id="mainContent" style="display: none;">
-            <div class="love-icon animate__animated animate__heartBeat animate__infinite">
-                <i class="fas fa-heart"></i>
-            </div>
-            
-            <h1 class="title">
-                Aytən mənimlə sevgili olarsan?
-                <span class="subtitle"></span>
-            </h1>
-            
-            <div class="buttons">
-                <button class="btn-yes shine-effect" id="yesButton">
-                    <i class="fas fa-heart"></i> Hə
-                </button>
-                <button class="btn-no" id="noButton">
-                    <i class="fas fa-times"></i> Yox
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="floating-hearts"></div>
-    <script src="sec.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const noButton = document.getElementById('noButton');
-            const yesButton = document.getElementById('yesButton');
-            const preloader = document.querySelector('.preloader');
-            const pageTransition = document.querySelector('.page-transition');
-            
-            // Kalp parçacıkları oluştur
-            function createHeartParticles() {
-                const heart = document.querySelector('.heart-loader');
-                const heartRect = heart.getBoundingClientRect();
-                
-                for(let i = 0; i < 20; i++) {
-                    const particle = document.createElement('div');
-                    particle.innerHTML = '💖';
-                    particle.className = 'heart-particle';
-                    particle.style.left = (heartRect.left + heartRect.width/2) + 'px';
-                    particle.style.top = (heartRect.top + heartRect.height/2) + 'px';
-                    particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
-                    particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 1000);
-                }
-            }
-            
-            // Preloader'ı kaldır ve geçiş animasyonunu başlat
-            window.addEventListener('load', function() {
-                setTimeout(() => {
-                    createHeartParticles();
-                    pageTransition.classList.add('animate-in');
-                    
-                    setTimeout(() => {
-                        preloader.style.opacity = '0';
-                        pageTransition.classList.add('animate-out');
-                        
-                        setTimeout(() => {
-                            preloader.style.display = 'none';
-                            pageTransition.remove();
-                        }, 1000);
-                    }, 1000);
-                }, 4000);
-            });
-            
-            // Hayır butonuna tıklanınca
-            noButton.addEventListener('click', function() {
-                Swal.fire({
-                    title: '💝 Bir Saniye...',
-                    html: `
-                        <div class="custom-swal-content">
-                            <div class="message-box animate__animated animate__fadeInLeft">
-                                <span class="emoji">😢</span>
-                                <p>Bağışda belə cavabla razı olammaram</p>
-                            </div>
-                            <div class="message-box animate__animated animate__fadeInRight animate__delay-1s">
-                                <span class="emoji">❤️</span>
-                                <p>Yenə düşün məncəə çünki səni çox seviremmmm</p>
-                            </div>
-                            <div class="message-box animate__animated animate__fadeInLeft animate__delay-2s">
-                                <span class="emoji">😡</span>
-                                <p>yox deme</p>
-                            </div>r
-                            <div class="message-box animate__animated animate__fadeInRight animate__delay-3s">
-                                <span class="emoji">🥰</span>
-                                <p>Sadəcə hə deyə bilərsən tay</p>
-                            </div>
-                        </div>
-                    `,
-                    background: 'rgba(255, 255, 255, 0.95)',
-                    backdrop: `rgba(255, 192, 203, 0.6)`,
-                    showConfirmButton: true,
-                    confirmButtonText: '💖 Tamam..',
-                    confirmButtonColor: '#ff1493',
-                    showClass: {
-                        popup: 'animate__animated animate__jackInTheBox'
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__rollOut'
-                    },
-                    customClass: {
-                        popup: 'custom-popup',
-                        title: 'custom-title',
-                        content: 'custom-content'
-                    }
-                }).then(() => {
-                    this.classList.add('animate__animated', 'animate__rollOut');
-                    setTimeout(() => {
-                        this.style.display = 'none';
-                    }, 1000);
-                });
-            });
-            
-            // Evet butonuna tıklandığında
-            yesButton.addEventListener('click', function() {
-                // Müzik başlat
-                const audio = new Audio('https://archive.org/download/cafune_202305/cafune_202305.mp3sarki.mp3');
-                audio.play();
-                
-                document.querySelector('.container').innerHTML = `
-                    <div class="celebration-content animate__animated animate__zoomInDown">
-                        <div class="heart-background"></div>
-                        <h1 class="mega-title animate__animated animate__heartBeat animate__infinite">
-                            YUPPPPİİEEEEE! 💖
-                        </h1>
-                        <div class="love-messages">
-                            <p class="animate__animated animate__fadeInLeft animate__delay-1s">
-                                Seni çoxxx sevirəmmm! 💖 Xəyallarımın gerçəyi oldun!
-                            </p>
-                            <p class="animate__animated animate__fadeInRight animate__delay-2s">
-                                Sen, Həyatımın ən xoş təsadüfisənnn!💖 Sene her gün yenidən aşiq olurammm.
-                            </p>
-                            <p class="animate__animated animate__fadeInLeft animate__delay-3s">
-                                Birliktə hər şey çox gözəl olacaqqq! 💖 Yaxşıki varsannnn...
-                            </p>
-                        </div>
-                    </div>
-                `;
-                
-                // Süper konfeti efekti
-                setInterval(() => {
-                    const colors = ['#ff69b4', '#ff1493', '#ff007f', '#ff0000', '#ff8c00'];
-                    const shapes = ['star', 'circle', 'heart'];
-                    
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: Math.random() - 0.2, x: Math.random() },
-                        colors: colors,
-                        shapes: shapes,
-                        gravity: 0.8,
-                        scalar: 2,
-                        drift: Math.random() - 0.5,
-                    });
-                }, 300);
-
-                // Kalp yağmuru başlat
-                createHeartRain();
-            });
-
-            // Message navigation logic
-            const messages = document.querySelectorAll('.message');
-            const nextBtn = document.querySelector('.next');
-            let currentMessage = 0;
-
-            function showMessage(index) {
-                messages.forEach(msg => msg.classList.remove('active'));
-                messages[index].classList.add('active', 'animate__animated', 'animate__fadeIn');
-                
-                if (index === messages.length - 1) {
-                    nextBtn.style.display = 'none';
-                } else {
-                    nextBtn.style.display = 'block';
-                }
-            }
-
-            nextBtn.addEventListener('click', () => {
-                currentMessage = (currentMessage + 1) % messages.length;
-                showMessage(currentMessage);
-            });
-
-            // Continue button logic
-            const continueButton = document.getElementById('continueButton');
-            if (continueButton) {
-                continueButton.addEventListener('click', function() {
-                    const messageCards = document.getElementById('messageCards');
-                    const mainContent = document.getElementById('mainContent');
-                    
-                    // Önce ana içeriği hazırla ama gösterme
-                    mainContent.style.display = 'block';
-                    mainContent.style.opacity = '0';
-                    
-                    // Mesaj kartlarını kaldır
-                    messageCards.classList.add('animate__animated', 'animate__fadeOut');
-                    
-                    setTimeout(() => {
-                        messageCards.style.display = 'none';
-                        // Ana içeriği göster
-                        mainContent.style.opacity = '1';
-                        mainContent.classList.add('animate__animated', 'animate__fadeIn');
-                    }, 500);
-                });
-            }
-        });
-
-        function createHeartRain() {
-            const emojis = ['❤️', '💖', '💗', '💓', '💞', '💕', '💝', '💘', '💌'];
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'falling-heart';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-                heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                document.body.appendChild(heart);
-                
-                setTimeout(() => heart.remove(), 5000);
-            }, 100);
-        }
-
-        // Stiller
-        const style = document.createElement('style');
-        style.textContent = `
-            .custom-swal-content {
-                padding: 20px;
-                max-height: 70vh;
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: #ff69b4 #fff;
-            }
-            
-            .custom-swal-content::-webkit-scrollbar {
-                width: 8px;
-            }
-            
-            .custom-swal-content::-webkit-scrollbar-track {
-                background: #fff;
-                border-radius: 10px;
-            }
-            
-            .custom-swal-content::-webkit-scrollbar-thumb {
-                background-color: #ff69b4;
-                border-radius: 10px;
-                border: 2px solid #fff;
-            }
-            
-            .message-box {
-                background: rgba(255, 105, 180, 0.1);
-                border-radius: 15px;
-                padding: 15px;
-                margin: 10px 0;
-                display: flex;
-                align-items: center;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-                transition: transform 0.3s ease;
-            }
-            
-            .message-box:hover {
-                transform: scale(1.02);
-            }
-            
-            .emoji {
-                font-size: 2em;
-                margin-right: 15px;
-            }
-            
-            .mega-title {
-                font-size: 4em;
-                background: linear-gradient(45deg, #ff1493, #ff69b4);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
-            }
-            
-            .love-messages p {
-                font-size: 1.8em;
-                color: #ff1493;
-                margin: 25px 0;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            }
-            
-            .heart-background {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: radial-gradient(circle, rgba(255,105,180,0.2) 0%, rgba(255,20,147,0.1) 100%);
-                z-index: -1;
-                border-radius: 20px;
-            }
-            
-            .falling-heart {
-                position: fixed;
-                font-size: 24px;
-                animation: fall linear forwards;
-                z-index: 1000;
-            }
-            
-            @keyframes fall {
-                0% {
-                    transform: translateY(-20vh) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(100vh) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-            
-            @media (max-width: 768px) {
-                .mega-title {
-                    font-size: 3em;
-                }
-                
-                .love-messages p {
-                    font-size: 1.4em;
-                }
-                
-                .message-box {
-                    flex-direction: column;
-                    text-align: center;
-                }
-                
-                .emoji {
-                    margin: 0 0 10px 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-
+    <title>I LOVE YOU</title>
     <style>
-        .heart {
-            position: fixed;
-            top: -20vh;
-            transform: translateY(0);
-            animation: fall 3s linear forwards;
-            z-index: 999;
-            user-select: none;
-            pointer-events: none;
-            transition: transform 0.3s ease;
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
-        .heart:hover {
-            transform: scale(1.2);
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(120vh) rotate(360deg);
-            }
-        }
-
-        @keyframes colorChange {
-            0% { color: #ff0077; }
-            25% { color: #ff69b4; }
-            50% { color: #ff1493; }
-            75% { color: #ff007f; }
-            100% { color: #ff00ea; }
-        }
-
-        .firework {
-            position: fixed;
-            bottom: 0;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ff69b4, #ff1493);
-            border-radius: 50%;
-            animation: firework 1s ease-out forwards;
-            z-index: 998;
-        }
-
-        @keyframes firework {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-50vh);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh);
-                opacity: 0;
-            }
-        }
-
-        .title {
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-        }
-
-        /* Responsive Tasarım */
-        @media screen and (max-width: 768px) {
-            .heart {
-                font-size: 16px !important; /* Mobilde kalpler daha küçük */
-            }
-
-            .title {
-                font-size: 1.8em !important;
-                padding: 0 10px;
-            }
-
-            .firework {
-                width: 6px;
-                height: 6px;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .heart {
-                font-size: 14px !important;
-            }
-
-            .title {
-                font-size: 1.5em !important;
-            }
-
-            .buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-
-        @media screen and (max-height: 600px) {
-            .heart {
-                animation-duration: 2s !important; /* Daha hızlı düşen kalpler */
-            }
-        }
-
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
-            gap: 40px;
-        }
-
-        .preloader.fade-out {
-            opacity: 0;
-        }
-
-        .heart-loader {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            animation: heartbeat 1.2s infinite;
-            margin-bottom: 0;
-        }
-
-        .heart-loader::before,
-        .heart-loader::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 75px;
-            height: 120px;
-            border-radius: 75px 75px 0 0;
-            background: #ff1493;
-            box-shadow: 
-                0 0 20px #ff1493,
-                0 0 40px #ff1493,
-                0 0 60px #ff1493;
-        }
-
-        .heart-loader::before {
-            left: 75px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart-loader::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(0.8); }
-            20% { transform: scale(1); }
-            40% { transform: scale(0.8); }
-            60% { transform: scale(1); }
-            80% { transform: scale(0.8); }
-            100% { transform: scale(0.8); }
-        }
-
-        .loading-text {
-            position: relative;
-            color: #fff;
-            font-size: clamp(1.5rem, 5vw, 2.2em);
-            font-weight: bold;
+        .message-box {
+            margin-top: 30px;
             text-align: center;
-            padding: 0 20px;
-            width: 100%;
-            letter-spacing: 3px;
-            animation: 
-                glow 1.5s ease-in-out infinite alternate,
-                wave 2s ease-in-out infinite,
-                scale 3s ease-in-out infinite;
-            background: linear-gradient(90deg, #ff1493, #ff69b4, #ff1493);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 
-                0 0 10px rgba(255,20,147,0.5),
-                0 0 20px rgba(255,20,147,0.3),
-                0 0 30px rgba(255,20,147,0.2);
         }
 
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        #hidden-message {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            color: #fff;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 2s ease;
         }
 
-        @keyframes scale {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        input[type="password"] {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 
-                    0 0 10px #fff,
-                    0 0 20px #fff,
-                    0 0 30px #ff1493,
-                    0 0 40px #ff1493;
-            }
-            to {
-                text-shadow: 
-                    0 0 20px #fff,
-                    0 0 30px #ff69b4,
-                    0 0 40px #ff69b4,
-                    0 0 50px #ff69b4;
-            }
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            background-color: #F39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
         }
 
-        /* Sayfa geçiş animasyonu */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 9998;
-            transform: scaleX(0);
-            transform-origin: right;
-        }
-
-        .page-transition.animate-in {
-            animation: pageTransitionIn 1s ease-in-out forwards;
-        }
-
-        .page-transition.animate-out {
-            animation: pageTransitionOut 1s ease-in-out forwards;
-        }
-
-        @keyframes pageTransitionIn {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
-
-        @keyframes pageTransitionOut {
-            from { transform: scaleX(1); transform-origin: left; }
-            to { transform: scaleX(0); transform-origin: left; }
-        }
-
-        /* Kalp parçacıkları */
-        .heart-particle {
-            position: absolute;
-            pointer-events: none;
-            animation: particleFade 1s ease-out forwards;
-        }
-
-        @keyframes particleFade {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-        }
-
-        /* Yıldızlı arka plan efekti */
-        .preloader:before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: starMove 60s linear infinite;
-        }
-
-        @keyframes starMove {
-            from { background-position: 0 0, 40px 60px, 130px 270px; }
-            to { background-position: -550px 0, -350px 60px, -250px 270px; }
-        }
-
-        /* Responsive düzenlemeler */
-        @media screen and (max-width: 768px) {
-            .preloader {
-                gap: 30px;
-            }
-
-            .loading-text {
-                font-size: clamp(1.2rem, 4vw, 1.8em);
-                letter-spacing: 2px;
-            }
-            
-            .heart-loader {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .heart-loader::before,
-            .heart-loader::after {
-                width: 60px;
-                height: 96px;
-            }
-            
-            .heart-loader::before {
-                left: 60px;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .preloader {
-                gap: 25px;
-            }
-
-            .loading-text {
-                font-size: clamp(1rem, 3.5vw, 1.5em);
-                letter-spacing: 1px;
-            }
-            
-            .heart-loader {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .heart-loader::before,
-            .heart-loader::after {
-                width: 50px;
-                height: 80px;
-            }
-            
-            .heart-loader::before {
-                left: 50px;
-            }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
     </style>
+    <script>
+       onload = function () {
+            var d = document;
+            // fade-in effekti
+            function feedin (feed, speed) {
+                var filter = 0;
+                feed.style.opacity = 0;
+                feed.style.MozOpacity = 0;
+                var timer = setInterval(function () {
+                    filter ++;
+                    feed.style.opacity = (filter / 10);
+                    feed.style.MozOpacity = (filter / 10);
+                    if (filter == 10) {
+                        clearInterval(timer);
+                    } 
+                },speed);
+            }
+
+            var str = [
+                [36,37,38,72,107,142,176,177,178],
+                [41,76,111,146,181,182,183],
+                [185,150,115,80,45,46,47,82,117,152,187],
+                [186,49,84,119,154,190],
+                [156,121,86,51,53,54,55,88,123,158,193,124,125,194,195],
+                [58,93,128,129,130,95,60,164,199],
+                [202,167,132,97,62,63,64,99,134,169,204],
+                [203,66,101,136,171,206,207,208,173,138,103,68]
+            ];
+
+            for (i=0;i<245;i++) {
+                var box = d.createElement('div');
+                with (d.body.appendChild(box).style) {
+                    if (i % 35 == 0) { clear = 'both'; }
+                    border = 'solid #222 1px';
+                    width = '20px';
+                    height = '20px';
+                    margin = '2px';
+                    float = 'left';
+                }   
+            }
+
+            var mess = d.getElementsByTagName('div');
+            var i = 0, j = 0;
+            setInterval(function () {
+                feedin(mess[str[i][j]], 25);
+                mess[str[i][j]].style.background = '#F39'
+                j++;
+                if (i == str.length) { clearInterval(timer); }
+                if (j == str[i].length) { i++; j = 0; }
+            }, 50);
+        } 
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            if (input === "02.06.2025") {
+                document.getElementById('hidden-message').style.display = "block";
+            } else {
+                alert("Şifrə səhvdir! 😢");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<!-- Mövcud I LOVE YOU animasiyası burada işləyir -->
+
+<div class="message-box">
+    <h2>💌 Məktub Qutusu</h2>
+    <input type="password" id="password-input" placeholder="Şifrəni daxil et">
+    <button onclick="checkPassword()">Aç</button>
+
+    <div id="hidden-message">
+        Əziz Aytənim,gözəlimm,birdənəmm,<br><br>
+        Bu yazdıqlarım biraz menasiz gələcək sanki hər küslukdə kod yazan bir adamın son şansı kimi amma əlimdən və ağlımdan başqa nəsə gəlmirr.Bu gün,dünən bəzi səhvər etdim bilmədən ya istəmədən .Xaiş edirəm mənə bir şans ver məni özündən məhrum etmə.<br><br>
+        02.06.2025 — ∞  💖<br><br>
+    </div>
+</div>
+
 </body>
 </html>
